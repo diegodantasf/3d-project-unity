@@ -16,7 +16,7 @@ public class GroundGenerator : MonoBehaviour
     int nextTileToActivate = -1;
     [HideInInspector]
     public bool gameOver = false;
-    static bool gameStarted = false;
+    public bool gameStarted = false;
     float score = 0;
 
     public static GroundGenerator instance;
@@ -62,41 +62,26 @@ public class GroundGenerator : MonoBehaviour
             spawnedTiles.Add(tileTmp);
         }
 
-        if (gameOver || !gameStarted)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                if (gameOver)
-                {
-                    //Restart current scene
-                    Scene scene = SceneManager.GetActiveScene();
-                    SceneManager.LoadScene(scene.name);
-                }
-                else
-                {
-                    //Start the game
-                    gameStarted = true;
-                }
+
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            if (gameOver) {
+                //Restart current scene
+                Scene scene = SceneManager.GetActiveScene();
+                SceneManager.LoadScene(scene.name);
+            } else if (!gameStarted) {
+                gameStarted = true;
             }
         }
     }
 
-    void OnGUI()
-    {
-        if (gameOver)
-        {
+    void OnGUI() {
+        if (gameOver) {
             GUI.color = Color.red;
             GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 100, 200, 200), "Game Over\nYour score is: " + ((int)score) + "\nPress 'Space' to restart");
+        } else if (!gameStarted) {
+            GUI.color = Color.red;
+            GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 100, 200, 200), "Press 'Space' to start");
         }
-        else
-        {
-            if (!gameStarted)
-            {
-                GUI.color = Color.red;
-                GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 100, 200, 200), "Press 'Space' to start");
-            }
-        }
-
 
         GUI.color = Color.green;
         GUI.Label(new Rect(5, 5, 200, 25), "Score: " + ((int)score));

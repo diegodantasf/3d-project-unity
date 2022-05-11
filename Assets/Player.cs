@@ -4,6 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 
+
 public class Player : MonoBehaviour
 {
     public float gravity = 20.0f;
@@ -12,13 +13,12 @@ public class Player : MonoBehaviour
     Rigidbody r;
     bool grounded = false;
     Vector3 defaultScale;
-    bool crouch = false;
 
     // Start is called before the first frame update
     void Start()
     {
         r = GetComponent<Rigidbody>();
-        r.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
+        //r.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
         r.freezeRotation = true;
         r.useGravity = false;
         defaultScale = transform.localScale;
@@ -26,15 +26,28 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (GroundGenerator.instance.gameOver || !GroundGenerator.instance.gameStarted) {
+            return;
+        }
+
         // Jump
         if (Input.GetKeyDown(KeyCode.W) && grounded)
         {
             r.velocity = new Vector3(r.velocity.x, CalculateJumpVerticalSpeed(), r.velocity.z);
         }
 
+        // Move to the left
+        if (Input.GetKey(KeyCode.A)) {
+            r.velocity = new Vector3(-2f, r.velocity.y, r.velocity.z);            
+        } 
+
+        // Move to the right
+        if (Input.GetKey(KeyCode.D)) {
+            r.velocity = new Vector3(2f, r.velocity.y, r.velocity.z);
+        }
+        
         //Crouch
-        crouch = Input.GetKey(KeyCode.S);
-        if (crouch)
+        if (Input.GetKey(KeyCode.S))
         {
             transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(defaultScale.x, defaultScale.y * 0.4f, defaultScale.z), Time.deltaTime * 7);
         }
