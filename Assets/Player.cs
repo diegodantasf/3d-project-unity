@@ -80,10 +80,21 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Finish")
-        {
+        if(collision.gameObject.tag == "Finish") {
             //print("GameOver!");
             GroundGenerator.instance.gameOver = true;
         }
+
+        if (collision.gameObject.tag == "Boost") {
+            GroundGenerator.instance.score += 10;
+            GroundGenerator.instance.movingSpeed += 4;
+            StartCoroutine(slowDown());
+        }
+
+    }
+
+    IEnumerator slowDown() {
+        yield return new WaitForSeconds(4f);
+        GroundGenerator.instance.movingSpeed -= 4;
     }
 }

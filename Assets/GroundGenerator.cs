@@ -17,7 +17,7 @@ public class GroundGenerator : MonoBehaviour
     [HideInInspector]
     public bool gameOver = false;
     public bool gameStarted = false;
-    float score = 0;
+    public float score = 0;
 
     public static GroundGenerator instance;
 

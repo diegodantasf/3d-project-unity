@@ -529,6 +529,8 @@ MonoBehaviour:
   tilesToPreSpawn: 15
   tilesWithoutObstacles: 2
   gameOver: 0
+  gameStarted: 0
+  score: 0
 --- !u!4 &1380245229
 Transform:
   m_ObjectHideFlags: 0
