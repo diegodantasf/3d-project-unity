@@ -590,6 +590,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Finish
       objectReference: {fileID: 0}
+    - target: {fileID: 6049079433124391993, guid: f36514e96b70190469ff98bc2f4f3069, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 27b5d1ee396273b4e92fd3f2f43964bb, type: 2}
     - target: {fileID: 6049079433124391995, guid: f36514e96b70190469ff98bc2f4f3069, type: 3}
       propertyPath: m_RootOrder
       value: 4

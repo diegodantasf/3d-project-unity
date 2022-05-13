@@ -8,7 +8,7 @@ public class GroundGenerator : MonoBehaviour
     public Camera mainCamera;
     public Transform startPoint; //Point from where ground tiles will start
     public PlatformTile tilePrefab;
-    public float movingSpeed = 12;
+    public float movingSpeed = 1;
     public int tilesToPreSpawn = 15; //How many tiles should be pre-spawned
     public int tilesWithoutObstacles = 2; //How many tiles at the beginning should not have obstacles, good for warm-up
 

@@ -11,8 +11,9 @@ public class Player : MonoBehaviour
     public float jumpHeight = 2.5f;
 
     Rigidbody r;
-    bool grounded = false;
+    public bool grounded = false;
     Vector3 defaultScale;
+    public Vector3 RotateAmount;
 
     // Start is called before the first frame update
     void Start()
@@ -22,28 +23,33 @@ public class Player : MonoBehaviour
         r.freezeRotation = true;
         r.useGravity = false;
         defaultScale = transform.localScale;
+        RotateAmount = new Vector3(300f, 0, 0);
     }
 
     void Update()
     {
+
         if (GroundGenerator.instance.gameOver || !GroundGenerator.instance.gameStarted) {
             return;
         }
 
+        transform.Rotate(RotateAmount * Time.deltaTime);
+
         // Jump
         if (Input.GetKeyDown(KeyCode.W) && grounded)
         {
+            grounded = false;
             r.velocity = new Vector3(r.velocity.x, CalculateJumpVerticalSpeed(), r.velocity.z);
         }
 
         // Move to the left
         if (Input.GetKey(KeyCode.A)) {
-            r.velocity = new Vector3(-2f, r.velocity.y, r.velocity.z);            
+            r.velocity = new Vector3(-4f, r.velocity.y, r.velocity.z);            
         } 
 
         // Move to the right
         if (Input.GetKey(KeyCode.D)) {
-            r.velocity = new Vector3(2f, r.velocity.y, r.velocity.z);
+            r.velocity = new Vector3(4f, r.velocity.y, r.velocity.z);
         }
         
         //Crouch
@@ -62,13 +68,6 @@ public class Player : MonoBehaviour
     {
         // We apply gravity manually for more tuning control
         r.AddForce(new Vector3(0, -gravity * r.mass, 0));
-
-        grounded = false;
-    }
-
-    void OnCollisionStay()
-    {
-        grounded = true;
     }
 
     float CalculateJumpVerticalSpeed()
@@ -80,6 +79,8 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        grounded = true;
+
         if(collision.gameObject.tag == "Finish") {
             //print("GameOver!");
             GroundGenerator.instance.gameOver = true;
