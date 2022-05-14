@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SunRotation : MonoBehaviour
 {
-    float theta = 0.1f;
+    public float theta = 2f;
     Vector3 playerPosition;
 
     void Start()
@@ -15,6 +15,6 @@ public class SunRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.RotateAround(playerPosition, new Vector3(0f, 0f, -0.1f), theta);
+        this.transform.RotateAround(playerPosition, new Vector3(0f, 0f, -0.1f), theta * Time.deltaTime);
     }
 }
