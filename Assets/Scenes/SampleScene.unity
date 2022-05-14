@@ -230,6 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a39012ddd18704483895a1f0a71daf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  theta: 20
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
