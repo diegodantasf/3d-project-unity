@@ -14,6 +14,7 @@ public class GroundGenerator : MonoBehaviour
 
     List<PlatformTile> spawnedTiles = new List<PlatformTile>();
     int nextTileToActivate = -1;
+
     [HideInInspector]
     public bool gameOver = false;
     public bool gameStarted = false;

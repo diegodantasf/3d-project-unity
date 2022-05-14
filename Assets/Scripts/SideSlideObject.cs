@@ -31,6 +31,9 @@ public class SideSlideObject : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
+        if (GroundGenerator.instance.gameOver || !GroundGenerator.instance.gameStarted) {
+            return;
+        }
         r.velocity = curDirection * Math.Min(MaximumFactor, TranslationFactor);
         TranslationFactor += Time.deltaTime / 10;
         //transform.Translate(curDirection * TranslationFactor * Time.deltaTime);

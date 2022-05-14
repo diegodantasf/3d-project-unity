@@ -13,7 +13,6 @@ public class Player : MonoBehaviour
     Rigidbody r;
     public bool grounded = false;
     Vector3 defaultScale;
-    public Vector3 RotateAmount;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +22,6 @@ public class Player : MonoBehaviour
         r.freezeRotation = true;
         r.useGravity = false;
         defaultScale = transform.localScale;
-        RotateAmount = new Vector3(300f, 0, 0);
     }
 
     void Update()
@@ -32,8 +30,6 @@ public class Player : MonoBehaviour
         if (GroundGenerator.instance.gameOver || !GroundGenerator.instance.gameStarted) {
             return;
         }
-
-        transform.Rotate(RotateAmount * Time.deltaTime);
 
         // Jump
         if (Input.GetKeyDown(KeyCode.W) && grounded)
