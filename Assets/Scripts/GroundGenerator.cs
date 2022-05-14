@@ -9,7 +9,7 @@ public class GroundGenerator : MonoBehaviour
     public Transform startPoint; //Point from where ground tiles will start
     public PlatformTile tilePrefab;
     public float movingSpeed = 1;
-    public int tilesToPreSpawn = 15; //How many tiles should be pre-spawned
+    public int tilesToPreSpawn = 5; //How many tiles should be pre-spawned
     public int tilesWithoutObstacles = 2; //How many tiles at the beginning should not have obstacles, good for warm-up
 
     List<PlatformTile> spawnedTiles = new List<PlatformTile>();
@@ -49,8 +49,9 @@ public class GroundGenerator : MonoBehaviour
         //Increase speed the higher score we get
         if (!gameOver && gameStarted)
         {
-            transform.Translate(-spawnedTiles[0].transform.forward * Time.deltaTime * movingSpeed, Space.World);
+            transform.Translate(-spawnedTiles[0].transform.forward * Time.deltaTime * (movingSpeed), Space.World);
             score += Time.deltaTime;
+            movingSpeed += Time.deltaTime / 10;
         }
 
         if (mainCamera.WorldToViewportPoint(spawnedTiles[0].endPoint.position).z < 0)

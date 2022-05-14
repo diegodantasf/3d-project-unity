@@ -40,12 +40,12 @@ public class Player : MonoBehaviour
 
         // Move to the left
         if (Input.GetKey(KeyCode.A)) {
-            r.velocity = new Vector3(-4f, r.velocity.y, r.velocity.z);            
+            r.velocity = new Vector3(-5f, r.velocity.y, r.velocity.z);            
         } 
 
         // Move to the right
         if (Input.GetKey(KeyCode.D)) {
-            r.velocity = new Vector3(4f, r.velocity.y, r.velocity.z);
+            r.velocity = new Vector3(5f, r.velocity.y, r.velocity.z);
         }
         
         //Crouch
